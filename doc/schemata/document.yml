@@ -1,7 +1,7 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: FIXME - Document
-description: FIXME
+title: Document
+description: documents to search
 stability: prototype
 strictProperties: true
 type:
@@ -13,11 +13,17 @@ definitions:
     readOnly: true
     format: uuid
     type:
-    - string
+    - integer
   name:
-    description: unique name of document
-    example: name
-    readOnly: true
+    description: title of document
+    example: Great Title
+    type:
+    - string
+  content:
+    description: content of document
+    example: |
+      conntent of the document
+      multiple lines are accepted
     type:
     - string
   identity:
@@ -47,12 +53,12 @@ links:
     - object
   title: Create
 - description: Delete an existing document.
-  href: "/documents/{(%2Fschemata%2Fdocument%23%2Fdefinitions%2Fidentity)}"
+  href: "/documents/{(%2Fschemata%2Fdocument%23%2Fdefinitions%2Fid)}"
   method: DELETE
   rel: destroy
   title: Delete
 - description: Info for existing document.
-  href: "/documents/{(%2Fschemata%2Fdocument%23%2Fdefinitions%2Fidentity)}"
+  href: "/documents/{(%2Fschemata%2Fdocument%23%2Fdefinitions%2Fid)}"
   method: GET
   rel: self
   title: Info
@@ -62,7 +68,7 @@ links:
   rel: instances
   title: List
 - description: Update an existing document.
-  href: "/documents/{(%2Fschemata%2Fdocument%23%2Fdefinitions%2Fidentity)}"
+  href: "/documents/{(%2Fschemata%2Fdocument%23%2Fdefinitions%2Fid)}"
   method: PATCH
   rel: update
   schema:
