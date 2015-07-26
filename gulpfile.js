@@ -9,27 +9,27 @@ var source = require("vinyl-source-stream");
 
 var sass = require("gulp-sass");
 
-gulp.task("scss", function() {
-  gulp.src("./scss/**/*scss")
+gulp.task("style", function() {
+  gulp.src(config.style.src)
     .pipe(sass())
-    .pipe(gulp.dest("./css"));
+    .pipe(gulp.dest(config.style.dest));
 });
 
-function bundle(name, watch = false) {
+function bundle(watch) {
   var bundler = browserify(config.browserify.entry);
 
   function rebundle() {
     bundler.bundle()
       // .on("error", $.util.log)
-      .pipe(source("bundle.js"))
-      .pipe(gulp.dest("./javascript"));
+      .pipe(source(config.browserify.output))
+      .pipe(gulp.dest(config.browserify.dest));
   }
 
-  if watch {
+  if (watch) {
     bundler = watchify(bundler).on("update", rebundle);
   }
   rebundle();
 }
 
-gulp.task("build", bundle.bind(null, name));
-gulp.task("watch", bundle.bind(null, name, watch = true));
+gulp.task("build", bundle.bind(null));
+gulp.task("watch", bundle.bind(null, true));

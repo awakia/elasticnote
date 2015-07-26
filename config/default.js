@@ -2,8 +2,13 @@ var dest = 'public';
 var src = 'app';
 
 module.exports = {
+  style: {
+    src: src + '/assets/style/**/*.scss',
+    dest: dest + '/style',
+  },
+
   minify: {
-    src: dest + '/js/*.js',
+    src: dest + 'assets/js/*.js',
     dest: dest + '/js/min',
   },
 
