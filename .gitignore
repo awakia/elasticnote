@@ -1,5 +1,6 @@
 .env
 public/style
+public/js
 
 .DS_Store
 

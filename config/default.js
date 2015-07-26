@@ -8,13 +8,13 @@ module.exports = {
   },
 
   minify: {
-    src: dest + 'assets/js/*.js',
+    src: dest + '/assets/js/*.js',
     dest: dest + '/js/min',
   },
 
   browserify: {
     entry: {
-      entries: src + '/js/main.js',
+      entries: src + '/assets/js/main.js',
       debug: true
     },
     dest: dest + '/js',

@@ -21,7 +21,7 @@ function bundle(watch) {
   function rebundle() {
     bundler.bundle()
       // .on("error", $.util.log)
-      .pipe(source(config.browserify.output))
+      .pipe(source(config.browserify.output.filename))
       .pipe(gulp.dest(config.browserify.dest));
   }
 
