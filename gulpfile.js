@@ -32,4 +32,7 @@ function bundle(watch) {
 }
 
 gulp.task("build", bundle.bind(null));
-gulp.task("watch", bundle.bind(null, true));
+gulp.task("watchify", bundle.bind(null, true));
+gulp.task("watch", ["watchify"] ,function() {
+  gulp.watch(config.style.src, ["style"])
+});
