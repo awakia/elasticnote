@@ -36,3 +36,5 @@ gulp.task("watchify", bundle.bind(null, true));
 gulp.task("watch", ["watchify"] ,function() {
   gulp.watch(config.style.src, ["style"])
 });
+
+gulp.task("default", ["watch"]);
