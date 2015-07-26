@@ -1,6 +1,7 @@
 require('dotenv').load();
 
 var gulp = require("gulp");
+var config = require("config");
 
 var browserify = require("browserify");
 var watchify = require("watchify");
@@ -14,8 +15,8 @@ gulp.task("scss", function() {
         .pipe(gulp.dest("./css"));
 });
 
-function bundle(name, watch = false, debug = true) {
-  var bundler = browserify;
+function bundle(name, watch = false) {
+  var bundler = browserify(config.browserify.entry);
 
   function rebundle() {
     bundler.bundle()
