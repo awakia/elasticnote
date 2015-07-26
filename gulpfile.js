@@ -1,9 +1,40 @@
+require('dotenv').load();
+
 var gulp = require("gulp");
+var config = require("config");
+
+var browserify = require("browserify");
+var watchify = require("watchify");
+var source = require("vinyl-source-stream");
 
 var sass = require("gulp-sass");
 
-gulp.task("scss", function() {
-    gulp.src("./scss/**/*scss")
-        .pipe(sass())
-        .pipe(gulp.dest("./css"));
+gulp.task("style", function() {
+  gulp.src(config.style.src)
+    .pipe(sass())
+    .pipe(gulp.dest(config.style.dest));
 });
+
+function bundle(watch) {
+  var bundler = browserify(config.browserify.entry);
+
+  function rebundle() {
+    bundler.bundle()
+      // .on("error", $.util.log)
+      .pipe(source(config.browserify.output.filename))
+      .pipe(gulp.dest(config.browserify.dest));
+  }
+
+  if (watch) {
+    bundler = watchify(bundler).on("update", rebundle);
+  }
+  rebundle();
+}
+
+gulp.task("build", bundle.bind(null));
+gulp.task("watchify", bundle.bind(null, true));
+gulp.task("watch", ["watchify"] ,function() {
+  gulp.watch(config.style.src, ["style"])
+});
+
+gulp.task("default", ["watch"]);
