@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "gulp": "~3.9.0",
     "gulp-sass": "^2.0.4"
   },
   "dependencies": {
-    "angular": "~1.4.3"
+    "angular": "~1.4.3",
+    "dotenv": "~1.2.0",
+    "config": "~1.14.0"
   }
 }
