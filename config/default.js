@@ -14,7 +14,7 @@ module.exports = {
 
   browserify: {
     entry: {
-      entries: src + '/assets/js/main.js',
+      entries: src + '/assets/js/app.js',
       debug: true
     },
     dest: dest + '/js',
