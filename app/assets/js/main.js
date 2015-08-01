@@ -1,2 +1,4 @@
 require("angular");
-alert("hello world");
+constants = require("./constants")
+
+alert(constants.apiUrl("hoge"));
