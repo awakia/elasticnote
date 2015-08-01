@@ -1,6 +1,6 @@
 require("angular");
-constants = require("./constants")
+var constants = require("./constants");
 
-angular.module(constants.appName, constants.externalModules)
+angular.module(constants.appName, constants.externalModules);
 
-require("./directive/all")
+require("./directive/all");

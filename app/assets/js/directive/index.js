@@ -6,7 +6,7 @@ function Directive() {
     restrict: "E",
     controller: Controller,
     controllerAs: "index",
-    template: "<div>hoge fuga</div>",
+    template: "<div>hoge</div>",
     scope: {}
   };
 }
