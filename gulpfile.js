@@ -12,6 +12,7 @@ var source = require("vinyl-source-stream");
 gulp.task("style", function() {
   gulp.src(config.style.src)
     .pipe($.sass())
+    .pipe($.size({title: "app.css"}))
     .pipe(gulp.dest(config.style.dest));
 });
 
@@ -22,6 +23,7 @@ function bundle(watch) {
     bundler.bundle()
       .on("error", $.util.log)
       .pipe(source(config.browserify.output.filename))
+      .pipe($.streamify($.size({title: config.browserify.output.filename})))
       .pipe(gulp.dest(config.browserify.dest));
   }
 
