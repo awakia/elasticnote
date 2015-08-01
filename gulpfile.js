@@ -1,17 +1,17 @@
 require('dotenv').load();
 
 var gulp = require("gulp");
+
+var $ = require("gulp-load-plugins")();
 var config = require("config");
 
 var browserify = require("browserify");
 var watchify = require("watchify");
 var source = require("vinyl-source-stream");
 
-var sass = require("gulp-sass");
-
 gulp.task("style", function() {
   gulp.src(config.style.src)
-    .pipe(sass())
+    .pipe($.sass())
     .pipe(gulp.dest(config.style.dest));
 });
 
@@ -20,7 +20,7 @@ function bundle(watch) {
 
   function rebundle() {
     bundler.bundle()
-      // .on("error", $.util.log)
+      .on("error", $.util.log)
       .pipe(source(config.browserify.output.filename))
       .pipe(gulp.dest(config.browserify.dest));
   }
