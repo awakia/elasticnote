@@ -1,10 +1,18 @@
 h1 {
   color: red;
   &:hover {
-    color: blue;
+    color: green;
   }
 }
 
 .red {
   color: red;
+}
+
+.round {
+  border-radius: 6px;
+}
+
+.flex {
+  display: flex;
 }

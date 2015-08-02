@@ -13,8 +13,11 @@ var source = require("vinyl-source-stream");
 
 gulp.task("style", function() {
   gulp.src(config.style.src)
+    .pipe($.sourcemaps.init())
     .pipe($.sass())
     .pipe($.size({title: "app.css"}))
+    .pipe($.autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest(config.style.dest));
 });
 
@@ -45,7 +48,7 @@ function bundle(watch) {
 gulp.task("build", bundle.bind(null));
 gulp.task("watchify", bundle.bind(null, true));
 
-gulp.task("serve", ["watchify"], function() {
+gulp.task("serve", ["style", "template", "watchify"], function() {
   browserSync({
     server: {
       baseDir: ['public']
