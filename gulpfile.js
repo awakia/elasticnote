@@ -8,6 +8,7 @@ var config = require("config");
 var browserSync = require("browser-sync");
 var reload = browserSync.reload;
 var browserify = require("browserify");
+var babelify = require("babelify");
 var watchify = require("watchify");
 var source = require("vinyl-source-stream");
 
@@ -31,7 +32,9 @@ function bundle(watch) {
   var bundler = browserify(config.browserify.entry);
 
   function rebundle() {
-    bundler.bundle()
+    bundler
+      .transform(babelify)
+      .bundle()
       .on("error", $.util.log)
       .pipe(source(config.browserify.output.filename))
       .pipe($.streamify($.size({title: config.browserify.output.filename})))
