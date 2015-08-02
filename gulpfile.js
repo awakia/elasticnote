@@ -16,6 +16,12 @@ gulp.task("style", function() {
     .pipe(gulp.dest(config.style.dest));
 });
 
+gulp.task("template", function() {
+  gulp.src(config.template.src)
+    .pipe($.size({title: "template/*.html"}))
+    .pipe(gulp.dest(config.template.dest))
+})
+
 function bundle(watch) {
   var bundler = browserify(config.browserify.entry);
 
@@ -37,6 +43,7 @@ gulp.task("build", bundle.bind(null));
 gulp.task("watchify", bundle.bind(null, true));
 gulp.task("watch", ["watchify"] ,function() {
   gulp.watch(config.style.src, ["style"])
+  gulp.watch(config.template.src, ["template"])
 });
 
 gulp.task("default", ["watch"]);

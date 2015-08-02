@@ -7,6 +7,11 @@ module.exports = {
     dest: dest + '/style',
   },
 
+  template: {
+    src: src + '/assets/template/**/*.html',
+    dest: dest + '/template',
+  },
+
   minify: {
     src: dest + '/assets/js/*.js',
     dest: dest + '/js/min',

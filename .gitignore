@@ -1,6 +1,7 @@
 .env
 public/style
 public/js
+public/template
 
 .DS_Store
 
@@ -34,4 +35,3 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
-
