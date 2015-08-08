@@ -1,7 +1,5 @@
 .env
-public/style
-public/js
-public/template
+public/
 
 .DS_Store
 

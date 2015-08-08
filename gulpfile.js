@@ -22,11 +22,11 @@ gulp.task("style", function() {
     .pipe(gulp.dest(config.style.dest));
 });
 
-gulp.task("template", function() {
-  gulp.src(config.template.src)
+gulp.task("html", function() {
+  gulp.src(config.html.src)
     .pipe($.size({title: "*.html"}))
     .pipe($.jade())
-    .pipe(gulp.dest(config.template.dest))
+    .pipe(gulp.dest(config.html.dest))
 })
 
 function bundle(watch) {
@@ -52,14 +52,14 @@ function bundle(watch) {
 gulp.task("build", bundle.bind(null));
 gulp.task("watchify", bundle.bind(null, true));
 
-gulp.task("serve", ["style", "template", "watchify"], function() {
+gulp.task("serve", ["style", "html", "watchify"], function() {
   browserSync({
     server: {
       baseDir: ['public']
     }
   })
   gulp.watch(config.style.src, ["style", reload]);
-  gulp.watch(config.template.src, ["template", reload]);
+  gulp.watch(config.html.src, ["html", reload]);
 })
 
 gulp.task("default", ["serve"]);

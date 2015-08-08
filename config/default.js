@@ -7,8 +7,8 @@ module.exports = {
     dest: dest + '/style',
   },
 
-  template: {
-    src: src + '/assets/**/*.{html,jade}',
+  html: {
+    src: src + '/assets/**/*.jade',
     dest: dest + '/',
   },
 
