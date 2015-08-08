@@ -8,8 +8,8 @@ module.exports = {
   },
 
   template: {
-    src: src + '/assets/template/**/*.html',
-    dest: dest + '/template',
+    src: src + '/assets/**/*.{html,jade}',
+    dest: dest + '/',
   },
 
   minify: {

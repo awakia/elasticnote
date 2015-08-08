@@ -24,7 +24,8 @@ gulp.task("style", function() {
 
 gulp.task("template", function() {
   gulp.src(config.template.src)
-    .pipe($.size({title: "template/*.html"}))
+    .pipe($.size({title: "*.html"}))
+    .pipe($.jade())
     .pipe(gulp.dest(config.template.dest))
 })
 
