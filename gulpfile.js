@@ -16,6 +16,7 @@ gulp.task("style", function() {
   gulp.src(config.style.src)
     .pipe($.sourcemaps.init())
     .pipe($.sass())
+    .on("error", $.util.log)
     .pipe($.size({title: "app.css"}))
     .pipe($.autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
     .pipe($.sourcemaps.write())
@@ -26,6 +27,7 @@ gulp.task("html", function() {
   gulp.src(config.html.src)
     .pipe($.size({title: "*.html"}))
     .pipe($.jade())
+    .on("error", $.util.log)
     .pipe(gulp.dest(config.html.dest))
 })
 
