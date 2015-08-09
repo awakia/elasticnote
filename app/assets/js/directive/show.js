@@ -3,13 +3,11 @@ class Controller {
 
 class Directive {
   constructor() {
-    return {
-      restrict: "E",
-      controller: Controller,
-      controllerAs: "show",
-      templateUrl: "template/show.html",
-      scope: {}
-    };
+    this.restrict = "E";
+    this.controller = Controller;
+    this.controllerAs = "show";
+    this.templateUrl = "template/show.html";
+    this.scope = {};
   }
 }
 
