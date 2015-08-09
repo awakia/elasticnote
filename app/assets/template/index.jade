@@ -2,3 +2,6 @@ div
   |hoge
   br
   |fuga
+.document(ng-repeat="document in indexController.documents")
+  .title(ng-bind="document.title")
+  .content(ng-bind="document.content")

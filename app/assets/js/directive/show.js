@@ -5,7 +5,7 @@ class Directive {
   constructor() {
     this.restrict = "E";
     this.controller = Controller;
-    this.controllerAs = "show";
+    this.controllerAs = "showController";
     this.templateUrl = "template/show.html";
     this.scope = {};
   }

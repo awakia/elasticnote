@@ -1,13 +1,20 @@
 class Controller {
+  constructor(DocumentStore) {
+    this.documents = DocumentStore.documents;
+  }
 }
+
+Controller.$inject = ["DocumentStore"];
 
 class Directive {
   constructor() {
     this.restrict = "E";
     this.controller = Controller;
-    this.controllerAs = "index";
+    this.controllerAs = "indexController";
     this.templateUrl = "template/index.html";
-    this.scope = {};
+    this.scope = {
+      "documents": "="
+    };
   }
 }
 
