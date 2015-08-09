@@ -13,6 +13,24 @@ h1 {
   border-radius: 6px;
 }
 
-.flex {
+#wrapper {
   display: flex;
+}
+
+///// index /////
+
+eln-index {
+  flex: 0 1 200px;
+  background-color: blue;
+  min-height: auto;
+}
+
+
+///// show /////
+
+eln-show {
+  flex: 1 1 auto;
+  display: flex;
+  background-color: green;
+  min-height: auto;
 }
