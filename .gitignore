@@ -1,5 +1,6 @@
 .env
 public/
+server/server
 
 .DS_Store
 
