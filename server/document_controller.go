@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -28,8 +29,16 @@ func (ctl *DocumentController) Index(w http.ResponseWriter, r *http.Request, ps 
 
 // Show returns the document
 func (ctl *DocumentController) Show(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	id := ps.ByName("id")
+	log.Print(id)
+	ctl.JSON(w, http.StatusOK, map[string]string{"id": id})
 }
 
 // Create creates new document
 func (ctl *DocumentController) Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	title := r.Form.Get("title")
+	content := r.FormValue("content")
+	source := r.FormValue("source")
+	document := NewDocument(title, content, source)
+	ctl.JSON(w, http.StatusOK, document)
 }
