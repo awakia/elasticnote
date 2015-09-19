@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"strconv"
@@ -33,7 +34,12 @@ func (ctl *DocumentController) Index(w http.ResponseWriter, r *http.Request, ps 
 func (ctl *DocumentController) Show(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	id := ps.ByName("id")
 	log.Print(id)
-	document, err := ctl.redis.Get("doc" + id).Result()
+	d, err := ctl.redis.Get("doc" + id).Result()
+	if err != nil {
+		log.Println(err)
+	}
+	var document Document
+	err = json.Unmarshal([]byte(d), &document)
 	if err != nil {
 		log.Println(err)
 	}
@@ -46,7 +52,11 @@ func (ctl *DocumentController) Create(w http.ResponseWriter, r *http.Request, ps
 	content := r.FormValue("content")
 	source := r.FormValue("source")
 	document := NewDocument(title, content, source)
-	err := ctl.redis.Set("doc"+strconv.Itoa(document.ID), document, 0).Err()
+	d, err := json.Marshal(&document)
+	if err != nil {
+		log.Println(err)
+	}
+	err = ctl.redis.Set("doc"+strconv.Itoa(document.ID), d, 0).Err()
 	if err != nil {
 		log.Println(err)
 	}
