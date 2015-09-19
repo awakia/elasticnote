@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -21,6 +22,7 @@ func NewDocumentController() DocumentController {
 
 // Index returns list of documents
 func (ctl *DocumentController) Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+
 	documents := []Document{
 		NewDocument("title", "content\ncontent", "souce"),
 	}
@@ -31,14 +33,22 @@ func (ctl *DocumentController) Index(w http.ResponseWriter, r *http.Request, ps 
 func (ctl *DocumentController) Show(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	id := ps.ByName("id")
 	log.Print(id)
-	ctl.JSON(w, http.StatusOK, map[string]string{"id": id})
+	document, err := ctl.redis.Get("doc" + id).Result()
+	if err != nil {
+		log.Println(err)
+	}
+	ctl.JSON(w, http.StatusOK, document)
 }
 
 // Create creates new document
 func (ctl *DocumentController) Create(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	title := r.Form.Get("title")
+	title := r.FormValue("title")
 	content := r.FormValue("content")
 	source := r.FormValue("source")
 	document := NewDocument(title, content, source)
+	err := ctl.redis.Set("doc"+strconv.Itoa(document.ID), document, 0).Err()
+	if err != nil {
+		log.Println(err)
+	}
 	ctl.JSON(w, http.StatusOK, document)
 }
