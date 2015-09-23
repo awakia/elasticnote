@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-var documentID = 1
+var documentID = 0
 
 // Document represents each text file to be searched
 type Document struct {
